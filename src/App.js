@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import { ChevronLeft, ChevronRight, Check, SkipForward, Plus, X, ExternalLink, Loader } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { ChevronLeft, ChevronRight, Check, SkipForward, Plus, X, ExternalLink } from 'lucide-react';
 
 const COLORS = [
   'from-pink-500 to-rose-500',
@@ -12,34 +12,34 @@ const COLORS = [
   'from-sky-500 to-blue-500',
 ];
 
-const ICONS = {
-  anthropic: '🧠',
-  substack: '✉️',
-  facebook: '👤',
-  arxiv: '📄',
-  linkedin: '💼',
-  blog: '📝',
-  github: '🐙',
-  generic: '🔗',
-};
+//const ICONS = {
+ // anthropic: '🧠',
+  //substack: '✉️',
+  //facebook: '👤',
+  //arxiv: '📄',
+  //linkedin: '💼',
+  //blog: '📝',
+  //github: '🐙',
+  //generic: '🔗',
+//};
 
 // Extract nuggets from content using simple heuristics
-const extractNuggets = (content, title, url) => {
+//const extractNuggets = (content, title, url) => {
   // Split by common separators
-  const paragraphs = content
-    .split(/\n\n+/)
-    .filter(p => p.trim().length > 100)
-    .slice(0, 15); // Max 15 nuggets
+  //const paragraphs = content
+    //.split(/\n\n+/)
+    //.filter(p => p.trim().length > 100)
+    //.slice(0, 15); // Max 15 nuggets
 
-  return paragraphs.map((para, idx) => ({
-    id: `${Date.now()}-${idx}`,
-    title: para.split('\n')[0].substring(0, 60) + '...',
-    content: para.substring(0, 200) + '...',
-    fullContent: para,
-    sourceUrl: url,
-    sourceTitle: title,
-  }));
-};
+  //return paragraphs.map((para, idx) => ({
+    //id: `${Date.now()}-${idx}`,
+    //title: para.split('\n')[0].substring(0, 60) + '...',
+    //content: para.substring(0, 200) + '...',
+    //fullContent: para,
+    //sourceUrl: url,
+    //sourceTitle: title,
+  //}));
+//};
 
 export default function LearningApp() {
   const [sources, setSources] = useState([]);
