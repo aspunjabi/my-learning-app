@@ -22,13 +22,11 @@ export default function LearningApp() {
   const [loading, setLoading] = useState(false);
   const [expandedNuggetId, setExpandedNuggetId] = useState(null);
 
-  // Load from localStorage
   useEffect(() => {
     const saved = localStorage.getItem('learningQueue');
     if (saved) {
       setSources(JSON.parse(saved));
     } else {
-      // Seed with real curated content
       const seeds = [
         {
           id: 1,
@@ -38,43 +36,38 @@ export default function LearningApp() {
           nuggets: [
             {
               id: '1-1',
-              title: 'Advanced Software Engineering Improvements',
-              content: 'Opus 4.7 shows notable improvement in advanced software engineering with particular gains on the most difficult tasks. Users can hand off hardest coding work with confidence.',
-              fullContent: 'Opus 4.7 handles complex, long-running tasks with rigor and consistency, pays precise attention to instructions, and devises ways to verify its own outputs before reporting back.',
+              title: 'Advanced Software Engineering',
+              content: 'Opus 4.7 shows notable improvement in advanced software engineering with particular gains on the most difficult tasks.',
+              fullContent: 'Users can hand off their hardest coding work with confidence. Opus 4.7 handles complex, long-running tasks with rigor and consistency, pays precise attention to instructions, and devises ways to verify its own outputs before reporting back.',
               sourceUrl: 'https://www.anthropic.com/news/claude-opus-4-7',
-              sourceTitle: 'Claude Opus 4.7 Release',
             },
             {
               id: '1-2',
               title: 'Better Vision Capabilities',
-              content: 'The model has substantially better vision and can see images in greater resolution. It\'s more tasteful and creative when completing professional tasks.',
-              fullContent: 'Higher resolution support enables use cases that depend on fine visual detail: computer-use agents reading dense screenshots, data extractions from complex diagrams.',
+              content: 'The model has substantially better vision and can see images in greater resolution.',
+              fullContent: 'Higher resolution support enables use cases that depend on fine visual detail: computer-use agents reading dense screenshots, data extractions from complex diagrams, and work that needs pixel-perfect references.',
               sourceUrl: 'https://www.anthropic.com/news/claude-opus-4-7',
-              sourceTitle: 'Claude Opus 4.7 Release',
             },
             {
               id: '1-3',
-              title: 'Instruction Following Improvements',
-              content: 'Opus 4.7 is substantially better at following instructions. Previous models interpreted instructions loosely or skipped parts; Opus 4.7 takes them literally.',
-              fullContent: 'Users should re-tune their prompts and harnesses for Opus 4.7, as it may produce unexpected results compared to earlier models when using the same prompts.',
+              title: 'Instruction Following',
+              content: 'Opus 4.7 is substantially better at following instructions. Previous models interpreted loosely; Opus 4.7 takes them literally.',
+              fullContent: 'Users should re-tune their prompts for Opus 4.7, as it may produce unexpected results compared to earlier models when using the same prompts. Where previous models skipped parts entirely, Opus 4.7 executes precisely.',
               sourceUrl: 'https://www.anthropic.com/news/claude-opus-4-7',
-              sourceTitle: 'Claude Opus 4.7 Release',
             },
             {
               id: '1-4',
               title: 'Cyber Capabilities & Safety',
-              content: 'Opus 4.7 cyber capabilities are less advanced than Mythos Preview. Released with safeguards that automatically detect and block high-risk cybersecurity uses.',
+              content: 'Opus 4.7 cyber capabilities are less advanced than Mythos Preview, with automatic safeguards for high-risk cybersecurity uses.',
               fullContent: 'Security professionals can join the Cyber Verification Program for legitimate cybersecurity purposes like vulnerability research and penetration testing.',
               sourceUrl: 'https://www.anthropic.com/news/claude-opus-4-7',
-              sourceTitle: 'Claude Opus 4.7 Release',
             },
             {
               id: '1-5',
-              title: 'Tokenizer & Token Usage Changes',
-              content: 'Opus 4.7 uses an updated tokenizer improving text processing. Same input can map to more tokens (roughly 1.0–1.35× depending on content type).',
+              title: 'Token Usage Changes',
+              content: 'Updated tokenizer means same input can map to 1.0–1.35× more tokens depending on content type.',
               fullContent: 'Opus 4.7 thinks more at higher effort levels, producing more output tokens. Users can control via effort parameter, task budgets, or prompting for conciseness.',
               sourceUrl: 'https://www.anthropic.com/news/claude-opus-4-7',
-              sourceTitle: 'Claude Opus 4.7 Release',
             },
           ],
         },
@@ -87,44 +80,39 @@ export default function LearningApp() {
             {
               id: '2-1',
               title: 'Data Movement is the Meta-Problem',
-              content: 'The real bottleneck isn\'t compute or memory—it\'s the cost of shuttling bits between them. DeepSeek, Apple unified memory, custom silicon: all symptoms of this constraint.',
-              fullContent: 'GPU arithmetic units spend most of their time idle, stalled while waiting for weights to be fetched from HBM. This "memory wall" is the core inefficiency.',
+              content: 'The real bottleneck is not compute or memory — it is the cost of shuttling bits between them.',
+              fullContent: 'DeepSeek, Apple unified memory, the custom silicon explosion: all symptoms of the same constraint. GPU arithmetic units spend most of their time idle, stalled while waiting for weights to be fetched from HBM. This memory wall is the core inefficiency.',
               sourceUrl: 'https://stateofthefuture.substack.com/p/ai-chips-computeram-and-the-future',
-              sourceTitle: 'ComputeRAM & The Future',
             },
             {
               id: '2-2',
               title: 'In-Memory vs Near-Memory Compute',
-              content: 'True in-memory compute has memory cells do math directly (hard to manufacture). Near-memory compute puts logic right next to memory arrays (more practical).',
-              fullContent: 'Synthara\'s approach: digital compute logic tightly coupled to standard memory with software stack ensuring compatibility. Gets 100x efficiency gains for edge without exotic physics.',
+              content: 'True in-memory compute has memory cells do math directly. Near-memory compute puts logic right next to memory arrays.',
+              fullContent: 'Synthara sits in near-memory territory. Their Compute RAM tightly couples digital compute logic to standard memory arrays and provides the software stack that keeps existing toolchains intact. Efficiency gains come from drastically shortening data paths rather than exploiting exotic physics.',
               sourceUrl: 'https://stateofthefuture.substack.com/p/ai-chips-computeram-and-the-future',
-              sourceTitle: 'ComputeRAM & The Future',
             },
             {
               id: '2-3',
               title: 'Groq & Cerebras Strategic Plays',
-              content: 'Groq: 230MB on-die SRAM with 80 TB/s bandwidth (~1 OOM better than HBM). Cerebras: 44GB SRAM on single wafer with 21 PB/s bandwidth—both addressing memory wall.',
-              fullContent: 'Cerebras WSE-3: 7,000x bandwidth vs single GPU\'s HBM stack. OpenAI deployed 750MW of Cerebras capacity—clear signal of market demand.',
+              content: 'Groq: 230MB on-die SRAM with 80 TB/s bandwidth. Cerebras: 44GB SRAM on single wafer. Both attacking the memory wall.',
+              fullContent: 'Cerebras WSE-3 delivers 7,000x bandwidth vs a single GPU HBM stack. OpenAI deployed 750MW of Cerebras capacity. Etched closed $500M to build a chip that only runs transformers — hard-wiring matrix multiplication patterns to dramatically reduce memory traffic per token.',
               sourceUrl: 'https://stateofthefuture.substack.com/p/ai-chips-computeram-and-the-future',
-              sourceTitle: 'ComputeRAM & The Future',
             },
             {
               id: '2-4',
-              title: 'IP Model vs Custom Silicon Viability',
-              content: 'Custom silicon companies (Cerebras, Groq, Tenstorrent) have <1% market share after a decade. IP licensing (like Arm) may be the only viable path for new entrants.',
-              fullContent: 'Arm proved you can define an entire computing era without fabricating a single chip. For a 20-person team, custom silicon is impossible; IP licensing scales.',
+              title: 'IP Model vs Custom Silicon',
+              content: 'Custom silicon companies have less than 1% market share after a decade. IP licensing may be the only viable path.',
+              fullContent: 'Arm proved you can define an entire computing era without fabricating a single chip. For a 20-person team in Zurich, custom silicon was never an option. The IP licensing model that everyone dismisses as capping upside might actually be the only path for new entrants.',
               sourceUrl: 'https://stateofthefuture.substack.com/p/ai-chips-computeram-and-the-future',
-              sourceTitle: 'ComputeRAM & The Future',
             },
             {
               id: '2-5',
-              title: 'DeepSeek & Mixture of Experts Efficiency',
-              content: 'DeepSeek\'s cost breakthrough: fetch weights once, reuse 1000x (cost ~1,100 units). Traditional: fetch same weights 1000 times (cost ~100K units).',
-              fullContent: 'Software innovation + data movement optimization can reduce compute cost 100x. Algorithm & architecture matter more than raw hardware scaling.',
+              title: 'DeepSeek & Weight Reuse',
+              content: 'Fetch weights once, reuse 1000x = cost of 1,100 units. Fetch 1000 times = cost of 100,000 units.',
+              fullContent: 'DeepSeek\'s mixture of experts approach ensures that when you fetch something, you use it as many times as possible before discarding it. Software and algorithmic improvements drive efficiency more than hardware changes — and are far cheaper to iterate on.',
               sourceUrl: 'https://stateofthefuture.substack.com/p/ai-chips-computeram-and-the-future',
-              sourceTitle: 'ComputeRAM & The Future',
             },
-        ],
+          ],
         },
       ];
       setSources(seeds);
@@ -132,49 +120,31 @@ export default function LearningApp() {
     }
   }, []);
 
-  // Save to localStorage whenever sources change
   useEffect(() => {
     localStorage.setItem('learningQueue', JSON.stringify(sources));
   }, [sources]);
 
   const addSource = async () => {
     if (!newUrl.trim() || !newTitle.trim()) return;
-
     setLoading(true);
     try {
-      // Determine type from URL
-      let type = 'generic';
-      if (newUrl.includes('anthropic')) type = 'anthropic';
-      else if (newUrl.includes('substack')) type = 'substack';
-      else if (newUrl.includes('facebook') || newUrl.includes('engineering.fb')) type = 'facebook';
-      else if (newUrl.includes('arxiv')) type = 'arxiv';
-      else if (newUrl.includes('linkedin')) type = 'linkedin';
-      else if (newUrl.includes('github')) type = 'github';
-
-      // For now, create placeholder nuggets
-      // In production, would call Anthropic API to extract from URL
-      const defaultNuggets = [
-        {
-          id: `${Date.now()}-0`,
-          title: 'Key Insight',
-          content: 'Click "View Full" to explore this content...',
-          fullContent: 'This content is being processed. Click the source link to view the full article.',
-          sourceUrl: newUrl,
-          sourceTitle: newTitle,
-        },
-      ];
-
       const newSource = {
         id: Date.now(),
         title: newTitle,
         url: newUrl,
-        type,
         color: COLORS[Math.floor(Math.random() * COLORS.length)],
-        nuggets: defaultNuggets,
+        nuggets: [
+          {
+            id: `${Date.now()}-0`,
+            title: 'Source added',
+            content: 'Open the source link to read the full content.',
+            fullContent: 'Backend extraction coming soon. For now, visit the source directly.',
+            sourceUrl: newUrl,
+          },
+        ],
         status: 'queued',
       };
-
-      setSources([...sources, newSource]);
+      setSources(prev => [...prev, newSource]);
       setNewUrl('');
       setNewTitle('');
       setShowAddModal(false);
@@ -214,14 +184,9 @@ export default function LearningApp() {
   if (sources.length === 0) {
     return (
       <div className="w-full h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 flex flex-col items-center justify-center p-4">
-        <style>{`
-          @import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Poppins:wght@300;400;600;700&display=swap');
-          body { font-family: 'Poppins', sans-serif; }
-          .font-mono { font-family: 'Space Mono', monospace; }
-        `}</style>
         <div className="text-center">
           <div className="text-6xl mb-4">📚</div>
-          <h1 className="text-3xl font-bold text-white mb-2">Your queue is empty</h1>
+          <h1 className="text-3xl font-bold text-white mb-2">Queue is empty</h1>
           <p className="text-slate-400 mb-8">Add learning sources to explore</p>
           <button
             onClick={() => setShowAddModal(true)}
@@ -230,40 +195,6 @@ export default function LearningApp() {
             Add Source
           </button>
         </div>
-
-        {showAddModal && (
-          <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50">
-            <div className="bg-slate-900 rounded-xl p-6 max-w-md w-full border border-slate-700">
-              <div className="flex justify-between items-center mb-4">
-                <h2 className="text-xl font-bold text-white">Add Source</h2>
-                <button onClick={() => setShowAddModal(false)} className="text-slate-400 hover:text-white">
-                  <X size={24} />
-                </button>
-              </div>
-              <input
-                type="text"
-                placeholder="Title"
-                value={newTitle}
-                onChange={(e) => setNewTitle(e.target.value)}
-                className="w-full px-4 py-2 bg-slate-800 border border-slate-700 rounded-lg text-white placeholder-slate-500 mb-3 focus:outline-none focus:border-pink-500"
-              />
-              <input
-                type="text"
-                placeholder="URL"
-                value={newUrl}
-                onChange={(e) => setNewUrl(e.target.value)}
-                className="w-full px-4 py-2 bg-slate-800 border border-slate-700 rounded-lg text-white placeholder-slate-500 mb-4 focus:outline-none focus:border-pink-500"
-              />
-              <button
-                onClick={addSource}
-                disabled={loading}
-                className="w-full px-4 py-2 bg-gradient-to-r from-pink-500 to-rose-500 text-white rounded-lg font-semibold hover:opacity-90 transition disabled:opacity-50"
-              >
-                {loading ? 'Processing...' : 'Add'}
-              </button>
-            </div>
-          </div>
-        )}
       </div>
     );
   }
@@ -278,21 +209,10 @@ export default function LearningApp() {
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Poppins:wght@300;400;600;700&display=swap');
         body { font-family: 'Poppins', sans-serif; }
-        .font-mono { font-family: 'Space Mono', monospace; }
-        
-        .carousel-container {
-          animation: slideIn 0.4s ease-out;
-        }
-        
+        .carousel-container { animation: slideIn 0.4s ease-out; }
         @keyframes slideIn {
-          from {
-            opacity: 0;
-            transform: translateY(20px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
+          from { opacity: 0; transform: translateY(20px); }
+          to { opacity: 1; transform: translateY(0); }
         }
       `}</style>
 
@@ -319,23 +239,15 @@ export default function LearningApp() {
         {currentNugget && (
           <div className="carousel-container w-full max-w-2xl">
             {/* Nugget Card */}
-            <div
-              className={`rounded-2xl bg-gradient-to-br ${currentSource.color} p-8 mb-6 min-h-[400px] flex flex-col justify-between relative overflow-hidden`}
-            >
-              {/* Decorative element */}
+            <div className={`rounded-2xl bg-gradient-to-br ${currentSource.color} p-8 mb-6 min-h-96 flex flex-col justify-between relative overflow-hidden`}>
               <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full -mr-32 -mt-32"></div>
-
               <div className="relative z-10">
-                <div className="mb-6">
-                  <h2 className="text-4xl font-bold text-white mb-3 leading-tight">
-                    {currentNugget.title}
-                  </h2>
-                  <p className="text-lg text-white/80">
-                    {currentNugget.content}
-                  </p>
-                </div>
-
-                {/* Expanded section */}
+                <h2 className="text-4xl font-bold text-white mb-3 leading-tight">
+                  {currentNugget.title}
+                </h2>
+                <p className="text-lg text-white/80">
+                  {currentNugget.content}
+                </p>
                 {expandedNuggetId === currentNugget.id && (
                   <div className="mt-6 pt-6 border-t border-white/20">
                     <p className="text-sm text-white/70 leading-relaxed">
@@ -344,15 +256,9 @@ export default function LearningApp() {
                   </div>
                 )}
               </div>
-
-              {/* Actions */}
               <div className="relative z-10 mt-8 flex gap-3">
                 <button
-                  onClick={() =>
-                    setExpandedNuggetId(
-                      expandedNuggetId === currentNugget.id ? null : currentNugget.id
-                    )
-                  }
+                  onClick={() => setExpandedNuggetId(expandedNuggetId === currentNugget.id ? null : currentNugget.id)}
                   className="px-4 py-2 bg-white/20 hover:bg-white/30 text-white rounded-lg text-sm font-semibold transition"
                 >
                   {expandedNuggetId === currentNugget.id ? 'Hide' : 'Read More'}
@@ -372,43 +278,30 @@ export default function LearningApp() {
             {/* Carousel Navigation */}
             <div className="flex items-center gap-4 mb-6">
               <button
-                onClick={() =>
-                  currentNuggetIdx > 0 && setCurrentNuggetIdx(currentNuggetIdx - 1)
-                }
+                onClick={() => currentNuggetIdx > 0 && setCurrentNuggetIdx(currentNuggetIdx - 1)}
                 disabled={currentNuggetIdx === 0}
                 className="p-2 rounded-lg bg-slate-700/50 hover:bg-slate-700 text-white disabled:opacity-30 transition"
               >
                 <ChevronLeft size={24} />
               </button>
-
               <div className="flex-1 flex gap-2">
                 {currentSource.nuggets.map((_, idx) => (
                   <div
                     key={idx}
-                    className={`h-1 flex-1 rounded-full transition ${
-                      idx === currentNuggetIdx
-                        ? 'bg-white'
-                        : idx < currentNuggetIdx
-                        ? 'bg-slate-600'
-                        : 'bg-slate-700'
-                    }`}
+                    className={`h-1 flex-1 rounded-full transition ${idx === currentNuggetIdx ? 'bg-white' : idx < currentNuggetIdx ? 'bg-slate-600' : 'bg-slate-700'}`}
                   ></div>
                 ))}
               </div>
-
               <button
                 onClick={moveToNextNugget}
-                disabled={
-                  currentNuggetIdx === currentSource.nuggets.length - 1 &&
-                  currentSourceIdx === sources.length - 1
-                }
+                disabled={currentNuggetIdx === currentSource.nuggets.length - 1 && currentSourceIdx === sources.length - 1}
                 className="p-2 rounded-lg bg-slate-700/50 hover:bg-slate-700 text-white disabled:opacity-30 transition"
               >
                 <ChevronRight size={24} />
               </button>
             </div>
 
-            {/* Source-level Actions */}
+            {/* Source Actions */}
             <div className="flex gap-3 mb-6">
               <button
                 onClick={() => markSourceDone(currentSource.id)}
@@ -426,7 +319,6 @@ export default function LearningApp() {
               </button>
             </div>
 
-            {/* Progress */}
             <div className="text-center text-sm text-slate-400">
               {remainingSources > 0
                 ? `${remainingSources} more source${remainingSources !== 1 ? 's' : ''} after this`
@@ -444,10 +336,7 @@ export default function LearningApp() {
           <div className="bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl p-6 max-w-md w-full border border-slate-700 shadow-2xl">
             <div className="flex justify-between items-center mb-4">
               <h2 className="text-xl font-bold text-white">Add Learning Source</h2>
-              <button
-                onClick={() => setShowAddModal(false)}
-                className="text-slate-400 hover:text-white transition"
-              >
+              <button onClick={() => setShowAddModal(false)} className="text-slate-400 hover:text-white transition">
                 <X size={24} />
               </button>
             </div>
@@ -456,7 +345,6 @@ export default function LearningApp() {
               placeholder="Source Title"
               value={newTitle}
               onChange={(e) => setNewTitle(e.target.value)}
-              onKeyPress={(e) => e.key === 'Enter' && addSource()}
               className="w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-lg text-white placeholder-slate-400 mb-3 focus:outline-none focus:border-pink-500 transition"
               autoFocus
             />
@@ -465,7 +353,6 @@ export default function LearningApp() {
               placeholder="Source URL"
               value={newUrl}
               onChange={(e) => setNewUrl(e.target.value)}
-              onKeyPress={(e) => e.key === 'Enter' && addSource()}
               className="w-full px-4 py-3 bg-slate-700 border border-slate-600 rounded-lg text-white placeholder-slate-400 mb-4 focus:outline-none focus:border-pink-500 transition"
             />
             <button
@@ -473,7 +360,7 @@ export default function LearningApp() {
               disabled={!newUrl.trim() || !newTitle.trim() || loading}
               className="w-full px-4 py-3 bg-gradient-to-r from-pink-500 to-rose-500 text-white rounded-lg font-semibold hover:opacity-90 transition disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              {loading ? 'Processing...' : 'Add Source'}
+              {loading ? 'Adding...' : 'Add Source'}
             </button>
           </div>
         </div>
@@ -481,4 +368,3 @@ export default function LearningApp() {
     </div>
   );
 }
- 
